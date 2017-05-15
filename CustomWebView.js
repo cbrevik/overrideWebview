@@ -33,7 +33,6 @@ class CustomWebView extends Component {
 
 var RCTCustomWebView = requireNativeComponent('RCTCustomWebView', CustomWebView, {
     nativeOnly: {
-        onOverrideUrlLoading: true,
         onLoadingStart: true,
         onLoadingError: true,
         onLoadingFinish: true,
