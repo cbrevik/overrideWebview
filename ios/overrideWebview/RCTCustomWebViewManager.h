@@ -1,5 +1,5 @@
-#import <React/RCTViewManager.h>
+#import <React/RCTWebViewManager.h>
 
-@interface RCTCustomWebViewManager : RCTViewManager
+@interface RCTCustomWebViewManager : RCTWebViewManager
 
 @end

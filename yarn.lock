@@ -2960,9 +2960,9 @@ react-devtools-core@^2.0.8:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
-"react-native@git://github.com/cbrevik/react-native.git#978af83":
+"react-native@git://github.com/cbrevik/react-native.git#6231b5c":
   version "1000.0.0"
-  resolved "git://github.com/cbrevik/react-native.git#978af83"
+  resolved "git://github.com/cbrevik/react-native.git#6231b5c"
   dependencies:
     absolute-path "^0.0.0"
     art "^0.10.0"
