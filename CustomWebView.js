@@ -31,14 +31,6 @@ class CustomWebView extends Component {
     }
 }
 
-var RCTCustomWebView = requireNativeComponent('RCTCustomWebView', CustomWebView, {
-    nativeOnly: {
-        onLoadingStart: true,
-        onLoadingError: true,
-        onLoadingFinish: true,
-        onMessage: true,
-        messagingEnabled: PropTypes.bool,
-    }
-});
+var RCTCustomWebView = requireNativeComponent('RCTCustomWebView', CustomWebView, WebView.extraNativeComponentConfig);
 
 export default CustomWebView;
