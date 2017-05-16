@@ -24,6 +24,6 @@ RCT_EXPORT_MODULE()
 }
 
 RCT_EXPORT_VIEW_PROPERTY(onSomethingHappened, RCTDirectEventBlock)
-
+RCT_EXPORT_VIEW_PROPERTY(somethingHappenedUrl, NSString)
 
 @end

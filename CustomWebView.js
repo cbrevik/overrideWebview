@@ -13,6 +13,7 @@ class CustomWebView extends Component {
     static propTypes = {
         ...WebView.propTypes,
         onSomethingHappened: PropTypes.func,
+        somethingHappenedUrl: PropTypes.string
     };
 
     onSomethingHappenedEvent = (event) => {
@@ -25,7 +26,7 @@ class CustomWebView extends Component {
             <WebView
                 {...this.props}
                 nativeComponent={RCTCustomWebView}
-                nativeComponentProps={{ onSomethingHappened: this.onSomethingHappenedEvent }}
+                nativeComponentProps={{ onSomethingHappened: this.onSomethingHappenedEvent, somethingHappenedUrl: this.props.somethingHappenedUrl }}
             />
         );
     }

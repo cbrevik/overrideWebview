@@ -12,6 +12,7 @@ import com.facebook.react.common.MapBuilder;
 import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.UIManagerModule;
+import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.events.Event;
 import com.facebook.react.uimanager.events.EventDispatcher;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
@@ -47,7 +48,8 @@ public class CustomWebViewManager extends ReactWebViewManager {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if (url != null && url.contains("github.com/facebook/react-native")) {
+            String somethingHappenedUrl = ((CustomWebView) view).getSomethingHappenedUrl();
+            if (url != null && somethingHappenedUrl != null && url.contains(somethingHappenedUrl)) {
                 final WritableMap params = Arguments.createMap();
                 params.putString("message", "Yes indeed!");
                 dispatchEvent(view, new SomethingHappenedEvent(view.getId(), params));
@@ -55,6 +57,27 @@ public class CustomWebViewManager extends ReactWebViewManager {
 
             return super.shouldOverrideUrlLoading(view, url);
         }
+    }
+
+    protected static class CustomWebView extends ReactWebView {
+        public CustomWebView(ThemedReactContext reactContext) {
+            super(reactContext);
+        }
+
+        protected @Nullable String mSomethingHappenedUrl;
+
+        public void setSomethingHappenedUrl(String url) {
+            mSomethingHappenedUrl = url;
+        }
+
+        public String getSomethingHappenedUrl() {
+            return mSomethingHappenedUrl;
+        }
+    }
+
+    @Override
+    protected ReactWebView createReactWebViewInstance(ThemedReactContext reactContext) {
+        return new CustomWebView(reactContext);
     }
 
     @Override
@@ -68,11 +91,9 @@ public class CustomWebViewManager extends ReactWebViewManager {
         view.setWebViewClient(new CustomWebViewClient());
     }
 
-    protected static void dispatchEvent(WebView webView, Event event) {
-        ReactContext reactContext = (ReactContext) webView.getContext();
-        EventDispatcher eventDispatcher =
-                reactContext.getNativeModule(UIManagerModule.class).getEventDispatcher();
-        eventDispatcher.dispatchEvent(event);
+    @ReactProp(name = "somethingHappenedUrl")
+    public void setSomethingHappenedUrl(WebView view, String url) {
+        ((CustomWebView) view).setSomethingHappenedUrl(url);
     }
 
     public @Nullable

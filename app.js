@@ -18,6 +18,7 @@ export default class overrideWebview extends Component {
             <CustomWebView
                 style={styles.webView}
                 source={{ uri: 'https://github.com/facebook/react-native' }}
+                somethingHappenedUrl="github.com/facebook/react-native"
                 onSomethingHappened={({ nativeEvent }) => {
                     console.log('Something happened!', nativeEvent.message)
                 }}
